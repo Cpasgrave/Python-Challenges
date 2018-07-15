@@ -2,6 +2,7 @@
 from itertools import combinations as comb
 
 # Teams of coders are coming to a CODE FESTIVAL:
+# Challenge proposed by Cépagrave
 # ---------------------------------
 # Each team stays united, of course (unless in
 # some of BONUS 1 solutions)
