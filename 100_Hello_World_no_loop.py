@@ -1,0 +1,7 @@
+# https://www.sololearn.com/Discuss/1026561/challenge-3-print-hellow-world/
+
+'''
+Write a program to print "Hello World" 100 times without using any loop.?
+'''
+
+print("Bello Torld\nXello Lorld\nTello Dorld\nGello Borld\nMello Zorld\nRello Porld\nZello Vorld\nRello Vorld\nKello Zorld\nHello Corld\nNello Forld\nKello Xorld\nMello Sorld\nKello Qorld\nMello Morld\nFello Sorld\nRello Rorld\nFello Vorld\nRello Norld\nSello Torld\nJello Horld\nNello World\nMello Porld\nPello Borld\nLello Morld\nDello Morld\nFello Dorld\nDello Corld\nZello Vorld\nNello Dorld\nXello Dorld\nJello Gorld\nZello Vorld\nSello Porld\nHello Dorld\nTello Rorld\nCello Qorld\nWello Forld\nCello Vorld\nTello Dorld\nHello Qorld\nWello Borld\nBello Sorld\nNello Dorld\nJello Korld\nVello Lorld\nXello World\nPello World\nWello Korld\nFello Borld\nCello Porld\nKello Norld\nFello Gorld\nHello Horld\nXello Horld\nJello Zorld\nFello Norld\nQello Gorld\nXello Korld\nBello Lorld\nLello Qorld\nFello Qorld\nFello Norld\nXello Corld\nXello Borld\nVello Sorld\nJello Qorld\nQello Porld\nXello Jorld\nNello Zorld\nRello Norld\nBello Corld\nTello Porld\nHello Sorld\nQello Sorld\nTello Zorld\nMello Korld\nMello Lorld\nQello Morld\nDello Porld\nPello World\nPello Porld\nCello Morld\nLello Dorld\nSello Corld\nBello Borld\nFello Morld\nZello Xorld\nRello Qorld\nCello Lorld\nVello Borld\nJello Lorld\nCello Porld\nCello Borld\nWello Jorld\nCello World\nQello Lorld\nVello Jorld\nHello Korld\nJello Forld")
