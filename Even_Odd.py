@@ -7,7 +7,33 @@ All languages are welcome.
 Any question or suggestion is welcome too. 
 Have fun!
 '''
-
 a = 19254157
-
 print(a,'is',['even','odd'][a%2])
+
+a = 19254158
+print(a,'is',['even','odd'][a%2])
+
+
+a = 238
+c = str(a/2).replace('.0','even').replace('.5','odd ')[-4:]
+print(a,'is',c)
+
+a = 239
+c = str(a/2).replace('.0','even').replace('.5','odd ')[-4:]
+print(a,'is',c)
+
+a = 3477
+c = int(int(str(a/2)[-1])/5)*'odd'+int(int(str(a/2-0.5)[-1])/5)*'even'
+print(a,'is',c)
+
+a = 3478
+c = int(int(str(a/2)[-1])/5)*'odd'+int(int(str(a/2-0.5)[-1])/5)*'even'
+print(a,'is',c)
+
+a = 111143
+b = ['oden','even','odd'][(-1)**int(str(a)[-1])]
+print(a,'is',b)
+
+a = 111142
+b = ['oden','even','odd'][(-1)**int(str(a)[-1])]
+print(a,'is',b)
