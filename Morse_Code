@@ -1,0 +1,29 @@
+# This code belongs to the great Tema !
+# His SL profile :
+# https://www.sololearn.com/Profile/8104661
+# His code :
+# https://code.sololearn.com/cSEC17i3KKcH/#py
+# I really like the approach, so I copied it here to suggest 
+# a way to modify it and make it reversible,
+# to make the morse code produced readable.
+
+from math import log2
+
+a = "now there are letters and words separations"
+
+print("".join(
+    map(lambda n: bin(n + 2 - 2 ** int(log2(n + 2)))[2:].zfill(int(log2(n + 2))).replace('0', '.').replace('1','-') +' 'if isinstance(n, int) else '/',
+        ['etianmsurwdkgohvf l pjbxcyzq'.find(c) if c >= 'a' and c <= 'z' else '/' for c in a.lower()])))
+
+
+# If you expand this code, you will get this code:
+# Если разобрать эту строчку по отдельным действиям, то будет так:
+
+#a = 'etianmsurwdkgohvf l pjbxcyzq'
+#r = ''
+#for c in input().lower():
+#    n = a.find(c)
+#    if n > -1:
+#        g = int(log2(n + 2))
+#        r += bin(n + 2 - 2 ** g)[2:].zfill(g).replace('0', '.').replace('1', '-')
+#print(r)
