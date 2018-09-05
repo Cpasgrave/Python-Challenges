@@ -226,37 +226,53 @@ def final_print(final,rounds):
     print(*G, sep='\n')
     print()
 
+def rules2sentences(rules):
+
+  for i,r in enumerate(rules):
+    fk = lambda x,y:dict.fromkeys(x,y)
+    first = {**fk([0,1],'the person in the {}'+{0:'st',1:'nd',2:'rd',3:'th',4:'th'}[r[0][1]]*(r[0][0]==0)+' house '),2:'the {} ',**fk([3,4,5],'the person using {} ')}[r[0][0]].format(elements[r[0][0]][r[0][1]])
+    second = {**fk([0,1],"the {}"+{0:'st',1:'nd',2:'rd',3:'th',4:'th'}[r[1][1]]*(r[1][0]==0)+" house."),2:'the {}.',**fk([3,4,5],'the {} user.')}[r[1][0]].format(elements[r[1][0]][r[1][1]])
+    if len(r[2])==1:
+      if r[2][0]==0: relation = 'lives in 'if r[1][0] in [0,1] else 'is '
+      else: relation = f"lives {abs(r[2][0])} house{'s'*(abs(r[2][0])>1)} to the {({0:'left',1:'right'}[r[2][0]>0])} from "
+    else:
+      relation = f"lives {abs(r[2][0])} house{'s'*(abs(r[2][0])>1)} "+f"to the {({0:'left',1:'right'}[r[2][0]>0])} "*((r[2][0]>0)!=(r[2][1]>0))+f"or {abs(r[2][1])} house{'s'*(abs(r[2][1])>1)} to the {({0:'left',1:'right'}[r[2][1]>0])} from "
+    print("{:2} -".format(i),first+relation+second)
+  rules = '\n'.join(['{:>13} {:^5} {:13} '.format(elements[r[0][0]][r[0][1]],' '.join(['+'*(i>0)+(str(i) if (i or len(r[2])==2) else '=') for i in r[2]]),elements[r[1][0]][r[1][1]]+',') for r in rules])
+  print("\nIf you want to see the solution,\njust copy/paste the following\nreformated rules into the code : )\n")
+  print(rules)
+
 def create_rules():
-  from random import sample,choice
+  from random import sample,choice,choices
   Target = sorted(zip(*[[[1 if j==s else 0 for j in range(m)] for s in sample([*range(m)],m)]for i in range(n)]))[::-1]
   rulz = set()
   final = []
   while len(final)!=1:
     for _ in range(30):
-      shifts_num = choice([1,2])
-      cell_a = (choice([*range(m)]),choice([*range(n)]))
-      cell_b = (choice([*range(m)]),choice([*range(n)]))
+      shifts_num = choices([1,2],weights=[.75,.25])
+      cell_a = (choice([*range(m)]), choice([*range(n)]))
+      w1 = [.75,.25]if shifts_num[0]==1 else [0,1]
+      w2 = (lambda x:[i/sum(x)for i in x])([(m-abs(cell_a[0]-i))**3 for i in range(m)if i!=cell_a[0]])
+      cell_b_row = choices([cell_a[0],*choices([i for i in range(m)if i!=cell_a[0]],weights=w2)],weights=w1)
+      cell_b = (*cell_b_row, choice([*range(n)]))
       elem_a = cell_a[1],Target[cell_a[0]][cell_a[1]].index(1)
       elem_b = cell_b[1],Target[cell_b[0]][cell_b[1]].index(1)
       shifts = (cell_b[0]-cell_a[0],)
-      if shifts_num == 2:
-        shift_2 = choice([i-cell_a[0] for i in range(m) if (i-cell_a[0])!=shifts[0]])
+      if shifts_num[0] == 2:
+        shift_2 = choice([-shifts[0],choice([shifts[0]+i for i in [-2,-1,1,2]if shifts[0]+i in (set(range(-m+1,m))-{0})])])
         shifts = tuple(choice([[*shifts,shift_2],[shift_2,*shifts]]))
       rulz.add((elem_a,elem_b,shifts))
-    final,rounds = solve(elements, rulz,1)
-
+    final,rounds = solve(elements, rulz,1,1)
   for r in set(rulz):
     temp = solve(elements,rulz-{r},1,1)[0]
     if len(temp)==1:
       rulz.remove(r)
-  rulz = '\n'.join(['{:>13} {:^5} {:13} '.format(elements[r[0][0]][r[0][1]],' '.join(['+'*(i>0)+(str(i) if (i or len(r[2])==2) else '=') for i in r[2]]),elements[r[1][0]][r[1][1]]+',') for r in rulz])
   return rulz
 
 from time import perf_counter as time
+
 t = time()
-
 final_print(*solve(elements,rules))
-
 print("    !! Your turn now !!\n(there's only one solution)\n       new rules:\n")
 new_rules = create_rules()
-print(new_rules)
+rules2sentences(new_rules)
